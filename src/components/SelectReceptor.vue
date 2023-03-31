@@ -1,6 +1,8 @@
 <script setup>
-import { ref } from "vue";
+import { ref, inject, computed } from "vue";
+import { useDatasetStore } from "../stores/datasets";
 
+const store = useDatasetStore();
 const props = defineProps({
   active: {
     type: Boolean,
@@ -8,22 +10,48 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(["toggle"]);
+
+const Datasets = inject("Datasets");
+const activeDataset = computed(() =>
+  Datasets.find((item) => {
+    return item.id === store.activeDataset;
+  })
+);
+const placeholder = computed(() => {
+  if (store.activeReceptor === null) {
+    return "Select receptor region";
+  } else {
+    return activeDataset.value.interactors.find((item) => {
+      return item.id === store.activeReceptor;
+    }).name;
+  }
+});
+const options = computed(() =>
+  activeDataset.value.interactors.map((item) => item.name)
+);
+
+const title = ref("Receptor region");
+
 function toggle() {
   emit("toggle", "receptor");
 }
 
-const data = ref({
-  title: "Receptor region",
-  placeholder: "Select receptor region",
-  options: ["LCM-Seq CS13", "LCM-Seq CS14", "LCM-Seq CS16", "UMAP CS13-CS15"],
-});
+function updateActiveReceptor(name) {
+  const newActiveReceptor = activeDataset.value.interactors.find((item) => {
+    return item.name == name;
+  });
+  store.$patch({
+    activeReceptor: newActiveReceptor.id,
+  });
+}
 </script>
 <template>
   <DropDownMenu
-    :title="data.title"
-    :placeholder="data.placeholder"
+    :title="title"
+    :placeholder="placeholder"
     :open="active"
-    :options="data.options"
+    :options="options"
     @toggle="toggle"
+    @select="updateActiveReceptor"
   ></DropDownMenu>
 </template>
