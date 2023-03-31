@@ -1,0 +1,55 @@
+[
+  {
+    "id": "cs13",
+    "name": "LCM-Seq CS13",
+    "interactors": [
+      { "id": "dorsal_inner", "name": "Dorsal inner" },
+      { "id": "dorsal_outer", "name": "Dorsal outer" },
+      { "id": "gonadal_epithelium_inner", "name": "Gonadal epithelium inner" },
+      { "id": "gonadal_epithelium_outer", "name": "Gonadal epithelium outer" },
+      { "id": "ventral_inner", "name": "Ventral inner" },
+      { "id": "ventral_outer", "name": "Ventral outer" }
+    ]
+  },
+  {
+    "id": "cs14",
+    "name": "LCM-Seq CS14",
+    "interactors": [
+      { "id": "dorsal_inner", "name": "Dorsal inner" },
+      { "id": "dorsal_median", "name": "Dorsal median" },
+      { "id": "dorsal_outer", "name": "Dorsal outer" },
+      { "id": "ventral_inner", "name": "Ventral inner" },
+      { "id": "ventral_median", "name": "Ventral median" },
+      { "id": "ventral_outer", "name": "Ventral outer" }
+    ]
+  },
+  {
+    "id": "cs16",
+    "name": "LCM-Seq CS16",
+    "interactors": [
+      { "id": "dorsal_inner", "name": "Dorsal inner" },
+      { "id": "dorsal_median", "name": "Dorsal median" },
+      { "id": "dorsal_outer", "name": "Dorsal outer" },
+      { "id": "ventral_inner", "name": "Ventral inner" },
+      { "id": "ventral_median", "name": "Ventral median" },
+      { "id": "ventral_outer", "name": "Ventral outer" }
+    ]
+  },
+  {
+    "id": "umap",
+    "name": "UMAP CS13-CS15",
+    "interactors": [
+      { "id": "cl_0", "name": "Cl_0" },
+      { "id": "cl_1", "name": "Cl_1" },
+      { "id": "cl_2", "name": "Cl_2" },
+      { "id": "cl_3", "name": "Cl_3" },
+      { "id": "cl_4", "name": "Cl_4" },
+      { "id": "cl_5", "name": "Cl_5" },
+      { "id": "cl_6", "name": "Cl_6" },
+      { "id": "cl_7", "name": "Cl_7" },
+      { "id": "cl_8", "name": "Cl_8" },
+      { "id": "cl_9", "name": "Cl_9" },
+      { "id": "cl_10", "name": "Cl_10" }
+    ]
+  }
+]
