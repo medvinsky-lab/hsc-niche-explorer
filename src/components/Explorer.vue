@@ -1,8 +1,11 @@
 <script setup>
-import { ref } from "vue";
+import { ref, provide } from "vue";
 import SelectDataset from "./SelectDataset.vue";
 import SelectLigand from "./SelectLigand.vue";
 import SelectReceptor from "./SelectReceptor.vue";
+import Datasets from "../data/datasets.json";
+
+provide("Datasets", Datasets);
 
 const menuStates = ref({
   dataset: false,

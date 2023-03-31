@@ -1,5 +1,15 @@
 <script setup>
-import { ref } from "vue";
+import { ref, inject, computed } from "vue";
+import { useDatasetStore } from "../stores/datasets";
+
+const store = useDatasetStore();
+
+const Datasets = inject("Datasets");
+const activeDataset = computed(() => {
+  return Datasets.find((item) => {
+    return item.id === store.activeDataset;
+  }).name;
+});
 
 const props = defineProps({
   active: {
@@ -15,15 +25,25 @@ function toggle() {
 const data = ref({
   title: "Dataset",
   placeholder: "Select dataset",
-  options: ["LCM-Seq CS13", "LCM-Seq CS14", "LCM-Seq CS16", "UMAP CS13-CS15"],
+  options: Datasets.map((item) => item.name),
 });
+
+function updateActiveDataset(name) {
+  const newActiveDataset = Datasets.find((item) => {
+    return item.name == name;
+  });
+  store.$patch({
+    activeDataset: newActiveDataset.id,
+  });
+}
 </script>
 <template>
   <DropDownMenu
     :title="data.title"
-    :placeholder="data.placeholder"
+    :placeholder="activeDataset"
     :open="active"
     :options="data.options"
     @toggle="toggle"
+    @select="updateActiveDataset"
   ></DropDownMenu>
 </template>

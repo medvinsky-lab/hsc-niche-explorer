@@ -22,12 +22,12 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["toggle"]);
+const emit = defineEmits(["toggle", "select"]);
 
-// function emitItem(title) {
-//   emit("toggle");
-//   emit("selection", title);
-// }
+function select(name) {
+  emit("toggle");
+  emit("select", name);
+}
 </script>
 
 <template>
@@ -48,7 +48,7 @@ const emit = defineEmits(["toggle"]);
           v-for="(option, index) in options"
           :key="index"
           :title="option"
-          @click="$emit('toggle')"
+          @click="select(option)"
         ></DropDownItem>
       </div>
     </div>
