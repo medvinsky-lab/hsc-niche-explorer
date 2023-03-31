@@ -10,25 +10,24 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: "Placeholder",
-    required: true,
   },
-  active: {
+  open: {
     type: Boolean,
     default: false,
     required: true,
   },
-  items: {
+  options: {
     type: Array,
     required: true,
   },
 });
 
-const emit = defineEmits(["toggle", "selection"]);
+const emit = defineEmits(["toggle"]);
 
-function emitItem(title) {
-  emit("toggle");
-  emit("selection", title);
-}
+// function emitItem(title) {
+//   emit("toggle");
+//   emit("selection", title);
+// }
 </script>
 
 <template>
@@ -42,14 +41,14 @@ function emitItem(title) {
         {{ placeholder }}
       </button>
       <div
-        v-show="active"
+        v-show="open"
         class="absolute bg-white w-[300px] rounded mt-1 border-gray-100 border-2"
       >
         <DropDownItem
-          v-for="(item, index) in items"
+          v-for="(option, index) in options"
           :key="index"
-          :title="item"
-          @click="emitItem(item)"
+          :title="option"
+          @click="$emit('toggle')"
         ></DropDownItem>
       </div>
     </div>

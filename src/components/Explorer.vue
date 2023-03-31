@@ -1,55 +1,24 @@
 <script setup>
-import DropDownMenu from "./DropDownMenu.vue";
-import Datasets from "../data/datasets.json";
+import { ref } from "vue";
+import SelectDataset from "./SelectDataset.vue";
+import SelectLigand from "./SelectLigand.vue";
+import SelectReceptor from "./SelectReceptor.vue";
 
-import { ref, watch } from "vue";
-
-const datasets = ref(Datasets);
-
-const dropdowns = ref([
-  {
-    title: "Dataset",
-    placeholder: "Select dataset",
-    active: false,
-    items: datasets.value.map((item) => item.name),
-    selection: null,
-  },
-  {
-    title: "Ligand region",
-    placeholder: "Select ligand region",
-    active: false,
-    items: ["LCM-Seq CS13", "LCM-Seq CS14", "LCM-Seq CS16", "UMAP CS13-CS15"],
-    selection: null,
-  },
-  {
-    title: "Receptor region",
-    placeholder: "Select receptor region",
-    active: false,
-    items: ["LCM-Seq CS13", "LCM-Seq CS14", "LCM-Seq CS16", "UMAP CS13-CS15"],
-    selection: null,
-  },
-]);
-
-const activeMenuIndex = ref(null);
-function toggleMenu(index) {
-  if (activeMenuIndex.value !== index) {
-    activeMenuIndex.value = index;
-  } else if (activeMenuIndex.value === index) {
-    activeMenuIndex.value = null;
-  }
-}
-
-watch(activeMenuIndex, async () => {
-  for (let i = 0; i < dropdowns.value.length; i++) {
-    if (activeMenuIndex.value === i) {
-      dropdowns.value[i].active = true;
-    } else {
-      dropdowns.value[i].active = false;
-    }
-  }
+const menuStates = ref({
+  dataset: false,
+  ligand: false,
+  receptor: false,
 });
 
-function updateSelection() {}
+function toggleMenus(key) {
+  for (const k in menuStates.value) {
+    if (k === key) {
+      menuStates.value[key] = !menuStates.value[key];
+    } else {
+      menuStates.value[k] = false;
+    }
+  }
+}
 </script>
 <template>
   <div>
@@ -59,17 +28,18 @@ function updateSelection() {}
     <div class="px-2 py-4 bg-slate-50 rounded">
       <div class="flex flex-row justify-between">
         <div class="flex space-x-4 mb-2">
-          <DropDownMenu
-            v-for="(item, index) in dropdowns"
-            :key="index"
-            :title="item.title"
-            :placeholder="item.placeholder"
-            :active="item.active"
-            :items="item.items"
-            :selection="test"
-            @toggle="toggleMenu(index)"
-            @selection="updateSelection"
-          ></DropDownMenu>
+          <SelectDataset
+            :active="menuStates.dataset"
+            @toggle="toggleMenus"
+          ></SelectDataset>
+          <SelectLigand
+            :active="menuStates.ligand"
+            @toggle="toggleMenus"
+          ></SelectLigand>
+          <SelectReceptor
+            :active="menuStates.receptor"
+            @toggle="toggleMenus"
+          ></SelectReceptor>
         </div>
         <div class="flex space-x-4 items-end">
           <p>Heatmap</p>
