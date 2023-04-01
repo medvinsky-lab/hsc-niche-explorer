@@ -33,7 +33,7 @@ const options = computed(() =>
 const title = ref("Ligand region");
 
 function toggle() {
-  emit("toggle", "ligand");
+  emit("toggle");
 }
 
 function updateActiveLigand(name) {

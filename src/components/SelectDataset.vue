@@ -21,7 +21,7 @@ const props = defineProps({
 });
 const emit = defineEmits(["toggle"]);
 function toggle() {
-  emit("toggle", "dataset");
+  emit("toggle");
 }
 
 function updateActiveDataset(name) {

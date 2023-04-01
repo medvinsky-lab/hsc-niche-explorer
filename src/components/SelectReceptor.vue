@@ -33,7 +33,7 @@ const options = computed(() =>
 const title = ref("Receptor region");
 
 function toggle() {
-  emit("toggle", "receptor");
+  emit("toggle");
 }
 
 function updateActiveReceptor(name) {

@@ -1,11 +1,15 @@
 <script setup>
 import { ref, provide } from "vue";
+import Button from "./Button.vue";
 import SelectDataset from "./SelectDataset.vue";
 import SelectLigand from "./SelectLigand.vue";
 import SelectReceptor from "./SelectReceptor.vue";
 import Datasets from "../data/datasets.json";
+import { useDatasetStore } from "../stores/datasets";
+import { computed } from "@vue/reactivity";
 
 provide("Datasets", Datasets);
+const store = useDatasetStore();
 
 const menuStates = ref({
   dataset: false,
@@ -22,6 +26,16 @@ function toggleMenus(key) {
     }
   }
 }
+
+function updatePlotType(newPlotType) {
+  store.$patch({
+    activePlotType: newPlotType,
+  });
+}
+
+const activePlotType = computed(() => {
+  return store.activePlotType;
+});
 </script>
 <template>
   <div>
@@ -33,20 +47,28 @@ function toggleMenus(key) {
         <div class="flex space-x-4 mb-2">
           <SelectDataset
             :active="menuStates.dataset"
-            @toggle="toggleMenus"
+            @toggle="toggleMenus('dataset')"
           ></SelectDataset>
           <SelectLigand
             :active="menuStates.ligand"
-            @toggle="toggleMenus"
+            @toggle="toggleMenus('ligand')"
           ></SelectLigand>
           <SelectReceptor
             :active="menuStates.receptor"
-            @toggle="toggleMenus"
+            @toggle="toggleMenus('receptor')"
           ></SelectReceptor>
         </div>
-        <div class="flex space-x-4 items-end">
-          <p>Heatmap</p>
-          <p>Interactions</p>
+        <div class="flex space-x-4 items-end mb-2">
+          <Button
+            @click="updatePlotType('heatmap')"
+            :active="activePlotType === 'heatmap'"
+            >Heatmap</Button
+          >
+          <Button
+            @click="updatePlotType('interactions')"
+            :active="activePlotType === 'interactions'"
+            >Interactions</Button
+          >
         </div>
       </div>
       <div class="grid grid-rows-1 grid-cols-2 gap-4">

@@ -5,5 +5,6 @@ export const useDatasetStore = defineStore("datasets", {
     activeDataset: "cs13",
     activeLigand: null,
     activeReceptor: null,
+    activePlotType: "heatmap",
   }),
 });
