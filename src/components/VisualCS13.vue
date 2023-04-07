@@ -1,13 +1,8 @@
 <script setup>
-import { computed } from "vue";
-import { useDatasetStore } from "../stores/datasets";
-
-const store = useDatasetStore();
-const activeLigand = computed(() => {
-  return store.activeLigand;
-});
-const activeReceptor = computed(() => {
-  return store.activeReceptor;
+const props = defineProps({
+  input: {
+    type: Array,
+  },
 });
 </script>
 <template>
@@ -96,18 +91,22 @@ const activeReceptor = computed(() => {
       />
       <path
         class="cls-13 g-outer"
+        :class="{ highlight: input.includes('gonadal_epithelium_outer') }"
         d="M174.17,322.66c-16.2,1-27.94,15.12-34.24,22.68-.93,1.11-1.88,2.26-2.31,2.68a19.11,19.11,0,0,1-5.05,4,4.43,4.43,0,0,0-2.48,4.37l.42,5.34c6.55-.51,10.73-4.61,13.47-7.35,4-4,15.75-21.77,30.77-22.75"
       />
       <path
         class="cls-14 g-inner"
+        :class="{ highlight: input.includes('gonadal_epithelium_inner') }"
         d="M174.75,331.64c15-1,27.05,11.61,31.16,23.26h0l4-1.4a4.51,4.51,0,0,0,2.56-6.23c-6.68-13.69-21-25.71-38.28-24.61"
       />
       <path
         class="cls-13 g-outer"
+        :class="{ highlight: input.includes('gonadal_epithelium_outer') }"
         d="M288.39,333.85c6.25,6.36,11.75,16.09,17.45,26.89,1.54,2.92,2.87,5.45,3.83,7,2.82,4.55,4.81,6.5,6.57,7.39a4.65,4.65,0,0,1,2.4,4.69l-.56,5C311,384,306.68,380,302,372.47c-3.94-6.36-11.36-23.22-19.69-31.91"
       />
       <path
         class="cls-14 g-inner"
+        :class="{ highlight: input.includes('gonadal_epithelium_inner') }"
         d="M282.33,340.56c-2.93-3.06-6-5.1-9-5.32-10-.73-16.91,8.1-20.38,19.66l-4.13-1.23a4.54,4.54,0,0,1-2.88-6c5.67-14.35,15.93-22.26,28-21.39,5.39.39,10.09,3.18,14.43,7.59"
       />
       <path
@@ -120,18 +119,22 @@ const activeReceptor = computed(() => {
       </text>
       <path
         class="cls-16 d-outer"
+        :class="{ highlight: input.includes('dorsal_outer') }"
         d="M183.75,284.51c-3.39-28.66,12.85-40.14,25.57-37.8a113,113,0,0,0,39,0c12.73-2.28,29,9.14,25.57,37.8,0,.25-.07.49-.1.74h13.58c2.42-21.42-4.2-34-10.2-40.73a32.59,32.59,0,0,0-24.2-11.2,30.16,30.16,0,0,0-5.29.47,108.07,108.07,0,0,1-19,1.64A104.32,104.32,0,0,1,210,233.8a29.45,29.45,0,0,0-5.39-.49,32.48,32.48,0,0,0-24.13,11.18c-6,6.76-12.63,19.33-10.21,40.76h13.58C183.82,285,183.78,284.76,183.75,284.51Z"
       />
       <path
         class="cls-17 v-outer"
+        :class="{ highlight: input.includes('ventral_outer') }"
         d="M273.83,285.25c-3.22,23.57-25.47,38.84-45,38.84s-41.77-15.27-45-38.84H170.28c0,.16,0,.3,0,.46,3.76,31.8,33.31,51.48,58.52,51.48s54.76-19.68,58.52-51.48c0-.16,0-.3.05-.46Z"
       />
       <path
         class="cls-18 v-inner"
+        :class="{ highlight: input.includes('ventral_inner') }"
         d="M228.84,311.45c-13.34,0-28.83-10.45-31.68-26.2h-13.3c3.21,23.57,25.47,38.84,45,38.84s41.77-15.27,45-38.84H260.52C257.67,301,242.19,311.45,228.84,311.45Z"
       />
       <path
         class="cls-19 d-inner"
+        :class="{ highlight: input.includes('dorsal_inner') }"
         d="M248.36,246.71a113,113,0,0,1-39,0c-12.72-2.34-29,9.14-25.57,37.8,0,.25.07.49.11.74h13.3c-.1-.57-.19-1.15-.26-1.74-1.1-9.25.4-16.71,4.22-21a9.5,9.5,0,0,1,7-3.45,7.2,7.2,0,0,1,1.32.12,107.43,107.43,0,0,0,19.27,1.7,110.7,110.7,0,0,0,19.44-1.69,7,7,0,0,1,1.31-.12,9.52,9.52,0,0,1,7.08,3.47c3.81,4.29,5.31,11.74,4.22,21q-.1.89-.27,1.74h13.31c0-.25.07-.49.1-.74C277.32,255.85,261.09,244.43,248.36,246.71Z"
       />
     </svg>
@@ -140,6 +143,19 @@ const activeReceptor = computed(() => {
 <style scoped>
 #cs13 {
   height: 500px;
+}
+
+.v-outer,
+.v-inner,
+.d-outer,
+.d-inner,
+.g-outer,
+.g-inner {
+  @apply opacity-20 !important;
+}
+
+.highlight {
+  @apply opacity-100 !important;
 }
 
 .cls-1 {

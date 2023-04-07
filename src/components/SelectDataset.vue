@@ -10,8 +10,7 @@ const activeDatasetName = computed(() => {
     return item.id === store.activeDataset;
   }).name;
 });
-const title = ref("Dataset");
-const options = ref(Datasets.map((item) => item.name));
+const options = ref(Datasets.map((item) => ({ id: item.id, name: item.name })));
 
 const props = defineProps({
   active: {
@@ -24,20 +23,18 @@ function toggle() {
   emit("toggle");
 }
 
-function updateActiveDataset(name) {
-  const newActiveDataset = Datasets.find((item) => {
-    return item.name == name;
-  });
+function updateActiveDataset(option) {
   store.$patch({
-    activeDataset: newActiveDataset.id,
+    activeDataset: option.id,
     activeLigand: null,
     activeReceptor: null,
   });
 }
 </script>
+
 <template>
   <DropDownMenu
-    :title="title"
+    :title="'Dataset'"
     :placeholder="activeDatasetName"
     :open="active"
     :options="options"

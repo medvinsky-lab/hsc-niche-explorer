@@ -26,22 +26,15 @@ const placeholder = computed(() => {
     }).name;
   }
 });
-const options = computed(() =>
-  activeDataset.value.interactors.map((item) => item.name)
-);
-
-const title = ref("Receptor region");
+const options = computed(() => activeDataset.value.interactors);
 
 function toggle() {
   emit("toggle");
 }
 
-function updateActiveReceptor(name) {
-  const newActiveReceptor = activeDataset.value.interactors.find((item) => {
-    return item.name == name;
-  });
+function updateActiveReceptor(option) {
   store.$patch({
-    activeReceptor: newActiveReceptor.id,
+    activeReceptor: option.id,
   });
 }
 function emitHover(option) {
@@ -50,7 +43,7 @@ function emitHover(option) {
 </script>
 <template>
   <DropDownMenu
-    :title="title"
+    :title="'Receptor region'"
     :placeholder="placeholder"
     :open="active"
     :options="options"

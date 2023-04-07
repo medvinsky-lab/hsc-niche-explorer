@@ -1,6 +1,7 @@
 <script setup>
-import { ref, provide, computed } from "vue";
+import { ref, provide, computed, watch } from "vue";
 import { useDatasetStore } from "../stores/datasets";
+import { storeToRefs } from "pinia";
 
 import Button from "./Button.vue";
 import SelectDataset from "./SelectDataset.vue";
@@ -17,15 +18,17 @@ import HeatmapPlot from "./HeatmapPlot.vue";
 provide("Datasets", Datasets);
 const store = useDatasetStore();
 
-const activeDataset = computed(() => {
-  return store.activeDataset;
-});
-const activePlotType = computed(() => {
-  return store.activePlotType;
-});
-
+const { activeDataset, activeLigand, activeReceptor, activePlotType } =
+  storeToRefs(store);
 const hoveredLigand = ref(null);
 const hoveredReceptor = ref(null);
+const input = computed(() => [
+  activeLigand.value,
+  hoveredLigand.value?.id,
+  activeReceptor.value,
+  hoveredReceptor.value?.id,
+]);
+
 const menuStates = ref({
   dataset: false,
   ligand: false,
@@ -87,10 +90,22 @@ function updatePlotType(newPlotType) {
       </div>
       <div class="grid grid-rows-1 grid-cols-2 gap-4">
         <div class="p-12 bg-white rounded">
-          <VisualCS13 v-if="activeDataset === 'cs13'"></VisualCS13>
-          <VisualCS14 v-if="activeDataset === 'cs14'"></VisualCS14>
-          <VisualCS16 v-if="activeDataset === 'cs16'"></VisualCS16>
-          <VisualUMAP v-if="activeDataset === 'umap'"></VisualUMAP>
+          <VisualCS13
+            v-if="activeDataset === 'cs13'"
+            :input="input"
+          ></VisualCS13>
+          <VisualCS14
+            v-if="activeDataset === 'cs14'"
+            :input="input"
+          ></VisualCS14>
+          <VisualCS16
+            v-if="activeDataset === 'cs16'"
+            :input="input"
+          ></VisualCS16>
+          <VisualUMAP
+            v-if="activeDataset === 'umap'"
+            :input="input"
+          ></VisualUMAP>
         </div>
         <div class="p-2 bg-white rounded">
           <HeatmapPlot v-if="activePlotType === 'heatmap'"></HeatmapPlot>

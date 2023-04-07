@@ -50,7 +50,7 @@ function hover(option) {
         <DropDownItem
           v-for="(option, index) in options"
           :key="index"
-          :title="option"
+          :title="option.name"
           @click="select(option)"
           @mouseover="hover(option)"
           @mouseout="$emit('itemExit')"
