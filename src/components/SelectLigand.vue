@@ -9,7 +9,7 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits(["toggle"]);
+const emit = defineEmits(["toggle", "itemHover", "itemExit"]);
 
 const Datasets = inject("Datasets");
 const activeDataset = computed(() =>
@@ -35,7 +35,6 @@ const title = ref("Ligand region");
 function toggle() {
   emit("toggle");
 }
-
 function updateActiveLigand(name) {
   const newActiveLigand = activeDataset.value.interactors.find((item) => {
     return item.name == name;
@@ -43,6 +42,9 @@ function updateActiveLigand(name) {
   store.$patch({
     activeLigand: newActiveLigand.id,
   });
+}
+function emitHover(option) {
+  emit("itemHover", option);
 }
 </script>
 <template>
@@ -53,5 +55,7 @@ function updateActiveLigand(name) {
     :options="options"
     @toggle="toggle"
     @select="updateActiveLigand"
+    @item-hover="emitHover"
+    @item-exit="$emit('itemExit')"
   ></DropDownMenu>
 </template>

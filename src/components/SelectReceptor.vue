@@ -44,6 +44,9 @@ function updateActiveReceptor(name) {
     activeReceptor: newActiveReceptor.id,
   });
 }
+function emitHover(option) {
+  emit("hover", option);
+}
 </script>
 <template>
   <DropDownMenu
@@ -53,5 +56,6 @@ function updateActiveReceptor(name) {
     :options="options"
     @toggle="toggle"
     @select="updateActiveReceptor"
+    @hover="emitHover"
   ></DropDownMenu>
 </template>

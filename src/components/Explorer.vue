@@ -1,16 +1,31 @@
 <script setup>
-import { ref, provide } from "vue";
+import { ref, provide, computed } from "vue";
+import { useDatasetStore } from "../stores/datasets";
+
 import Button from "./Button.vue";
 import SelectDataset from "./SelectDataset.vue";
 import SelectLigand from "./SelectLigand.vue";
 import SelectReceptor from "./SelectReceptor.vue";
 import Datasets from "../data/datasets.json";
-import { useDatasetStore } from "../stores/datasets";
-import { computed } from "@vue/reactivity";
+import VisualCS13 from "./VisualCS13.vue";
+import VisualCS14 from "./VisualCS14.vue";
+import VisualCS16 from "./VisualCS16.vue";
+import VisualUMAP from "./VisualUMAP.vue";
+import InteractionsPlot from "./InteractionsPlot.vue";
+import HeatmapPlot from "./HeatmapPlot.vue";
 
 provide("Datasets", Datasets);
 const store = useDatasetStore();
 
+const activeDataset = computed(() => {
+  return store.activeDataset;
+});
+const activePlotType = computed(() => {
+  return store.activePlotType;
+});
+
+const hoveredLigand = ref(null);
+const hoveredReceptor = ref(null);
 const menuStates = ref({
   dataset: false,
   ligand: false,
@@ -26,16 +41,11 @@ function toggleMenus(key) {
     }
   }
 }
-
 function updatePlotType(newPlotType) {
   store.$patch({
     activePlotType: newPlotType,
   });
 }
-
-const activePlotType = computed(() => {
-  return store.activePlotType;
-});
 </script>
 <template>
   <div>
@@ -52,10 +62,14 @@ const activePlotType = computed(() => {
           <SelectLigand
             :active="menuStates.ligand"
             @toggle="toggleMenus('ligand')"
+            @item-hover="(option) => (hoveredLigand = option)"
+            @item-exit="hoveredLigand = null"
           ></SelectLigand>
           <SelectReceptor
             :active="menuStates.receptor"
             @toggle="toggleMenus('receptor')"
+            @item-hover="(option) => (hoveredReceptor = option)"
+            @item-exit="hoveredReceptor = null"
           ></SelectReceptor>
         </div>
         <div class="flex space-x-4 items-end mb-2">
@@ -72,8 +86,18 @@ const activePlotType = computed(() => {
         </div>
       </div>
       <div class="grid grid-rows-1 grid-cols-2 gap-4">
-        <div class="p-2 bg-white rounded"><p>hello</p></div>
-        <div class="p-2 bg-white rounded"><p>hello</p></div>
+        <div class="p-12 bg-white rounded">
+          <VisualCS13 v-if="activeDataset === 'cs13'"></VisualCS13>
+          <VisualCS14 v-if="activeDataset === 'cs14'"></VisualCS14>
+          <VisualCS16 v-if="activeDataset === 'cs16'"></VisualCS16>
+          <VisualUMAP v-if="activeDataset === 'umap'"></VisualUMAP>
+        </div>
+        <div class="p-2 bg-white rounded">
+          <HeatmapPlot v-if="activePlotType === 'heatmap'"></HeatmapPlot>
+          <InteractionsPlot
+            v-if="activePlotType === 'interactions'"
+          ></InteractionsPlot>
+        </div>
       </div>
     </div>
   </div>

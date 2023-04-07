@@ -22,11 +22,14 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["toggle", "select"]);
+const emit = defineEmits(["toggle", "select", "itemHover", "itemExit"]);
 
-function select(name) {
+function select(option) {
   emit("toggle");
-  emit("select", name);
+  emit("select", option);
+}
+function hover(option) {
+  emit("itemHover", option);
 }
 </script>
 
@@ -49,6 +52,8 @@ function select(name) {
           :key="index"
           :title="option"
           @click="select(option)"
+          @mouseover="hover(option)"
+          @mouseout="$emit('itemExit')"
         ></DropDownItem>
       </div>
     </div>
