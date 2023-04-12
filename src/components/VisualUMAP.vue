@@ -46,6 +46,11 @@ const chartOptionsHe = ref({
           enabled: false,
         },
       },
+      events: {
+        legendItemClick: function (e) {
+          e.preventDefault();
+        },
+      },
       marker: {
         symbol: symbol,
         radius: radius,
@@ -63,11 +68,23 @@ const chartOptionsNiche = ref({
     text: "",
   },
   chart: {
+    reflow: false,
+    animation: false,
     type: "scatter",
     height: 500,
   },
   plotOptions: {
-    scatter: {
+    series: {
+      states: {
+        inactive: {
+          enabled: false,
+        },
+      },
+      events: {
+        legendItemClick: function (e) {
+          e.preventDefault();
+        },
+      },
       marker: {
         symbol: symbol,
         radius: radius,
@@ -77,19 +94,29 @@ const chartOptionsNiche = ref({
   series: UmapDataNiche,
 });
 
-const chartRef = ref(null);
+const chartRefHe = ref(null);
+const chartRefNiche = ref(null);
+
 const seriesElements = ref([]);
 
-onMounted(() => {
-  const ids = UmapDataHe.map((e) => e.id);
-  const chart = chartRef.value.chart;
+function getChartSeriesIds(data, chart) {
+  const ids = data.map((e) => e.id);
   const elements = chart.series.map(
     (series) => series.group.element.nextSibling
   );
-  seriesElements.value = ids.reduce((arr, id, index) => {
+  return ids.reduce((arr, id, index) => {
     arr.push({ id, element: elements[index] });
     return arr;
   }, []);
+}
+
+onMounted(() => {
+  const umap1Elements = getChartSeriesIds(UmapDataHe, chartRefHe.value.chart);
+  const umap2Elements = getChartSeriesIds(
+    UmapDataNiche,
+    chartRefNiche.value.chart
+  );
+  seriesElements.value = [...umap1Elements, ...umap2Elements];
 });
 
 watchEffect(() => {
@@ -110,10 +137,10 @@ watchEffect(() => {
 <template>
   <div class="h-[1000px] z-0">
     <div ref="parentRef">
-      <Chart :options="chartOptionsHe" ref="chartRef"></Chart>
+      <Chart :options="chartOptionsHe" ref="chartRefHe"></Chart>
     </div>
     <div>
-      <Chart :options="chartOptionsNiche"></Chart>
+      <Chart :options="chartOptionsNiche" ref="chartRefNiche"></Chart>
     </div>
   </div>
 </template>
