@@ -57,7 +57,7 @@ function updatePlotType(newPlotType) {
     </div>
     <div class="px-2 py-4 bg-slate-50 rounded">
       <div class="flex flex-row justify-between">
-        <div class="flex space-x-4 mb-2">
+        <div class="flex space-x-4 mb-2 z-10">
           <SelectDataset
             :active="menuStates.dataset"
             @toggle="toggleMenus('dataset')"
@@ -105,6 +105,7 @@ function updatePlotType(newPlotType) {
           <VisualUMAP
             v-if="activeDataset === 'umap'"
             :input="input"
+            :menu-states="menuStates"
           ></VisualUMAP>
         </div>
         <div class="p-2 bg-white rounded">

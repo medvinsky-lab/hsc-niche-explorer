@@ -39,17 +39,17 @@
     "id": "umap",
     "name": "UMAP CS13-CS15",
     "interactors": [
-      { "id": "cl_0", "name": "Cl_0" },
-      { "id": "cl_1", "name": "Cl_1" },
-      { "id": "cl_2", "name": "Cl_2" },
-      { "id": "cl_3", "name": "Cl_3" },
-      { "id": "cl_4", "name": "Cl_4" },
-      { "id": "cl_5", "name": "Cl_5" },
-      { "id": "cl_6", "name": "Cl_6" },
-      { "id": "cl_7", "name": "Cl_7" },
-      { "id": "cl_8", "name": "Cl_8" },
-      { "id": "cl_9", "name": "Cl_9" },
-      { "id": "cl_10", "name": "Cl_10" }
+      { "id": "cl_0", "name": "Cluster 0" },
+      { "id": "cl_1", "name": "Cluster 1" },
+      { "id": "cl_2", "name": "Cluster 2" },
+      { "id": "cl_3", "name": "Cluster 3" },
+      { "id": "cl_4", "name": "Cluster 4" },
+      { "id": "cl_5", "name": "Cluster 5" },
+      { "id": "cl_6", "name": "Cluster 6" },
+      { "id": "cl_7", "name": "Cluster 7" },
+      { "id": "cl_8", "name": "Cluster 8" },
+      { "id": "cl_9", "name": "Cluster 9" },
+      { "id": "cl_10", "name": "Cluster 10" }
     ]
   }
 ]
