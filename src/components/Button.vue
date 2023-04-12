@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 <template>
   <button
-    class="p-2 bg-slate-900 text-slate-50 text-sm rounded w-[140px]"
+    class="p-2 bg-slate-900 text-slate-50 text-sm rounded w-[140px] font-semibold hover:bg-orange-200 hover:text-slate-900"
     :class="{ active: active }"
   >
     <slot></slot>
