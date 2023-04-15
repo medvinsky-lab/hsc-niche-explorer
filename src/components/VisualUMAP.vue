@@ -136,7 +136,7 @@ watchEffect(() => {
 </script>
 <template>
   <div class="h-[1000px] z-0">
-    <div ref="parentRef">
+    <div>
       <Chart :options="chartOptionsHe" ref="chartRefHe"></Chart>
     </div>
     <div>

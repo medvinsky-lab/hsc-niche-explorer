@@ -108,7 +108,7 @@ function updatePlotType(newPlotType) {
             :menu-states="menuStates"
           ></VisualUMAP>
         </div>
-        <div class="p-2 bg-white rounded">
+        <div class="py-12 bg-white rounded">
           <HeatmapPlot v-if="activePlotType === 'heatmap'"></HeatmapPlot>
           <InteractionsPlot
             v-if="activePlotType === 'interactions'"
