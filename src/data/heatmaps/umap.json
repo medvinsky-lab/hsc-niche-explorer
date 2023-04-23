@@ -1,16 +1,16 @@
 {
   "axis": [
-    { "id": "cl_0", "label": "Cl_0" },
-    { "id": "cl_1", "label": "Cl_1" },
-    { "id": "cl_2", "label": "Cl_2" },
-    { "id": "cl_3", "label": "Cl_3" },
-    { "id": "cl_4", "label": "Cl_4" },
-    { "id": "cl_5", "label": "Cl_5" },
-    { "id": "cl_6", "label": "Cl_6" },
-    { "id": "cl_7", "label": "Cl_7" },
-    { "id": "cl_8", "label": "Cl_8" },
-    { "id": "cl_9", "label": "Cl_9" },
-    { "id": "cl_10", "label": "Cl_10" }
+    { "id": "cl_0", "label": "Cluster 0" },
+    { "id": "cl_1", "label": "Cluster 1" },
+    { "id": "cl_2", "label": "Cluster 2" },
+    { "id": "cl_3", "label": "Cluster 3" },
+    { "id": "cl_4", "label": "Cluster 4" },
+    { "id": "cl_5", "label": "Cluster 5" },
+    { "id": "cl_6", "label": "Cluster 6" },
+    { "id": "cl_7", "label": "Cluster 7" },
+    { "id": "cl_8", "label": "Cluster 8" },
+    { "id": "cl_9", "label": "Cluster 9" },
+    { "id": "cl_10", "label": "Cluster 10" }
   ],
   "data": [
     [0, 0, 0.05],

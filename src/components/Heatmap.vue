@@ -10,18 +10,17 @@ const props = defineProps({
   data: {
     type: Object,
   },
+  ligand: {
+    type: String,
+  },
+  receptor: {
+    type: String,
+  },
   height: {
     type: Number,
     default: 500,
   },
 });
-
-function getPointCategoryName(point, dimension) {
-  var series = point.series,
-    isY = dimension === "y",
-    axis = series[isY ? "yAxis" : "xAxis"];
-  return axis.categories[point[isY ? "y" : "x"]];
-}
 
 const axisLabels = props.data.axis.map((e) => {
   return e.label;
@@ -36,16 +35,29 @@ const chartOptions = ref({
   },
   chart: {
     type: "heatmap",
-    plotBorderWidth: 1,
     height: props.height,
   },
   xAxis: {
     categories: axisLabels,
+    gridLineWidth: 0,
+    title: {
+      text: "Receptor",
+      style: {
+        fontWeight: "bold",
+      },
+    },
   },
   yAxis: {
     categories: axisLabels,
     title: null,
     reversed: true,
+    gridLineWidth: 0,
+    title: {
+      text: "Ligand",
+      style: {
+        fontWeight: "bold",
+      },
+    },
   },
   colorAxis: {
     stops: [
@@ -65,16 +77,39 @@ const chartOptions = ref({
     y: 25,
     symbolHeight: 280,
   },
+  tooltip: {
+    formatter() {
+      const yLabel = this.series.yAxis.categories[this.point.y];
+      const xLabel = this.series.xAxis.categories[this.point.x];
+      return (
+        `<strong>Ligand:</strong> ${xLabel}<br>` +
+        `<strong>Receptor:</strong> ${yLabel}<br>` +
+        `<strong>Value:</strong> ${this.point.value}`
+      );
+    },
+  },
   series: [
     {
-      borderWidth: 1,
+      borderRadius: 5,
       data: props.data.data,
       dataLabels: {
         enabled: true,
         color: "#000000",
       },
+      colsize: 0.95,
+      rowsize: 0.95,
+      marker: {
+        states: {
+          select: {
+            enabled: true,
+            fillColor: undefined,
+            lineWidth: 3,
+            lineColor: "red",
+          },
+        },
+      },
     },
   ],
 });
 </script>
-<template><Chart :options="chartOptions"></Chart></template>
+<template><Chart ref="heatmap" :options="chartOptions"></Chart></template>

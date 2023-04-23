@@ -14,7 +14,8 @@ const props = defineProps({
   },
 });
 const activeInput = computed(() => {
-  return [props.input[0], props.input[2]];
+  // return [props.input[0], props.input[2]];
+  return props.input;
 });
 
 const menusActive = computed(() => {
@@ -124,7 +125,7 @@ watchEffect(() => {
     if (activeInput.value.includes(seriesElement.id)) {
       seriesElement.element.classList.remove("opacity-10");
     } else if (!activeInput.value.includes(seriesElement.id)) {
-      const onlyNull = activeInput.value.every((value) => value === null);
+      const onlyNull = activeInput.value.every((value) => value == null);
       if (onlyNull) {
         seriesElement.element.classList.remove("opacity-10");
       } else if (!onlyNull) {

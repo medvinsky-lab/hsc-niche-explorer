@@ -109,7 +109,9 @@ function updatePlotType(newPlotType) {
           ></VisualUMAP>
         </div>
         <div class="py-12 bg-white rounded">
-          <HeatmapPlot v-if="activePlotType === 'heatmap'"></HeatmapPlot>
+          <KeepAlive>
+            <HeatmapPlot v-if="activePlotType === 'heatmap'"></HeatmapPlot>
+          </KeepAlive>
           <InteractionsPlot
             v-if="activePlotType === 'interactions'"
           ></InteractionsPlot>
