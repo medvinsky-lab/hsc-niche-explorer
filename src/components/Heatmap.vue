@@ -36,6 +36,7 @@ const chartOptions = ref({
   chart: {
     type: "heatmap",
     height: props.height,
+    animation: false,
   },
   xAxis: {
     categories: axisLabels,

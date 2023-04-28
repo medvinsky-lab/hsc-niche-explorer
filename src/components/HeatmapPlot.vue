@@ -12,21 +12,44 @@ import { computed } from "@vue/reactivity";
 import { ref, watch } from "vue";
 
 const store = useDatasetStore();
-const { activeDataset, activeLigand, activeReceptor, activePlotType } =
-  storeToRefs(store);
+const { activeDataset, activeLigand, activeReceptor } = storeToRefs(store);
 
-const selectionActive = computed(() => {
-  return [activeLigand.value, activeReceptor.value].every((e) => e != null);
+const activeSelection = computed(() => {
+  return [activeLigand.value, activeReceptor.value];
+});
+
+const heatmapData = computed(() => {
+  if (activeDataset.value == "cs13") {
+    return HeatmapDataCS13;
+  }
+  if (activeDataset.value == "cs14") {
+    return HeatmapDataCS14;
+  }
+  if (activeDataset.value == "cs16") {
+    return HeatmapDataCS16;
+  }
+  if (activeDataset.value == "umap") {
+    return HeatmapDataUMAP;
+  }
 });
 
 const highcharts = ref(null);
-
-watch(selectionActive, () => {
-  if (selectionActive.value) {
+watch(activeSelection, () => {
+  const selected = activeSelection.value.every((e) => e != null);
+  if (selected) {
     const chart = highcharts.value.$refs.heatmap.chart;
     const series = chart.series[0];
-    const point = series.points[10];
-    point.select(true, true);
+    const ligandIndex = heatmapData.value.axis.findIndex((e) => {
+      return e.id == activeLigand.value;
+    });
+    const receptorIndex = heatmapData.value.axis.findIndex((e) => {
+      return e.id == activeReceptor.value;
+    });
+    series.points.forEach((point, index) => {
+      if ((point.x === receptorIndex) & (point.y === ligandIndex)) {
+        point.select();
+      }
+    });
   }
 });
 </script>
@@ -34,22 +57,22 @@ watch(selectionActive, () => {
   <Heatmap
     ref="highcharts"
     v-if="activeDataset === 'cs13'"
-    :data="HeatmapDataCS13"
+    :data="heatmapData"
   ></Heatmap>
   <Heatmap
     ref="highcharts"
     v-if="activeDataset === 'cs14'"
-    :data="HeatmapDataCS14"
+    :data="heatmapData"
   ></Heatmap>
   <Heatmap
     ref="highcharts"
     v-if="activeDataset === 'cs16'"
-    :data="HeatmapDataCS16"
+    :data="heatmapData"
   ></Heatmap>
   <Heatmap
     ref="highcharts"
     v-if="activeDataset === 'umap'"
-    :data="HeatmapDataUMAP"
+    :data="heatmapData"
     :height="1000"
   ></Heatmap>
 </template>
