@@ -12,7 +12,7 @@ import VisualCS13 from "./VisualCS13.vue";
 import VisualCS14 from "./VisualCS14.vue";
 import VisualCS16 from "./VisualCS16.vue";
 import VisualUMAP from "./VisualUMAP.vue";
-import InteractionsPlot from "./InteractionsPlot.vue";
+import InteractionPlot from "./InteractionPlot.vue";
 import HeatmapPlot from "./HeatmapPlot.vue";
 
 provide("Datasets", Datasets);
@@ -108,13 +108,13 @@ function updatePlotType(newPlotType) {
             :menu-states="menuStates"
           ></VisualUMAP>
         </div>
-        <div class="py-12 bg-white rounded">
+        <div class="flex place-items-center bg-white rounded">
           <KeepAlive>
             <HeatmapPlot v-if="activePlotType === 'heatmap'"></HeatmapPlot>
           </KeepAlive>
-          <InteractionsPlot
+          <InteractionPlot
             v-if="activePlotType === 'interactions'"
-          ></InteractionsPlot>
+          ></InteractionPlot>
         </div>
       </div>
     </div>

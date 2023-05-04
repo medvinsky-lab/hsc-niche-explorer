@@ -35,6 +35,7 @@ const chartOptions = ref({
   },
   chart: {
     type: "heatmap",
+    width: 600,
     height: props.height,
     animation: false,
   },
@@ -113,4 +114,6 @@ const chartOptions = ref({
   ],
 });
 </script>
-<template><Chart ref="heatmap" :options="chartOptions"></Chart></template>
+<template>
+  <Chart ref="heatmap" :options="chartOptions"></Chart>
+</template>

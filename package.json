@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cytoscape": "^3.24.0",
+    "cytoscape-d3-force": "^1.1.4",
     "highcharts-vue": "^1.4.0",
     "pinia": "^2.0.32",
     "vue": "^3.2.47"
