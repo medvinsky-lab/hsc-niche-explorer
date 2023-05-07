@@ -54,25 +54,33 @@ watch(activeSelection, () => {
 });
 </script>
 <template>
-  <Heatmap
-    ref="highcharts"
-    v-if="activeDataset === 'cs13'"
-    :data="heatmapData"
-  ></Heatmap>
-  <Heatmap
-    ref="highcharts"
-    v-if="activeDataset === 'cs14'"
-    :data="heatmapData"
-  ></Heatmap>
-  <Heatmap
-    ref="highcharts"
-    v-if="activeDataset === 'cs16'"
-    :data="heatmapData"
-  ></Heatmap>
-  <Heatmap
-    ref="highcharts"
-    v-if="activeDataset === 'umap'"
-    :data="heatmapData"
-    :height="1000"
-  ></Heatmap>
+  <div class="w-full">
+    <Heatmap
+      ref="highcharts"
+      v-if="activeDataset === 'cs13'"
+      :data="heatmapData"
+    ></Heatmap>
+    <Heatmap
+      ref="highcharts"
+      v-if="activeDataset === 'cs14'"
+      :data="heatmapData"
+    ></Heatmap>
+    <Heatmap
+      ref="highcharts"
+      v-if="activeDataset === 'cs16'"
+      :data="heatmapData"
+    ></Heatmap>
+    <Heatmap
+      ref="highcharts"
+      v-if="activeDataset === 'umap'"
+      :data="heatmapData"
+      :height="1000"
+    ></Heatmap>
+  </div>
 </template>
+
+<style>
+.highcharts-container {
+  @apply mx-auto;
+}
+</style>

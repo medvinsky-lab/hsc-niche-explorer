@@ -108,6 +108,7 @@ function updatePlotType(newPlotType) {
             :menu-states="menuStates"
           ></VisualUMAP>
         </div>
+
         <div class="flex place-items-center bg-white rounded">
           <KeepAlive>
             <HeatmapPlot v-if="activePlotType === 'heatmap'"></HeatmapPlot>
@@ -115,6 +116,63 @@ function updatePlotType(newPlotType) {
           <InteractionPlot
             v-if="activePlotType === 'interactions'"
           ></InteractionPlot>
+        </div>
+      </div>
+      <div class="grid grid-rows-1 grid-cols-2 gap-4 py-2">
+        <div v-if="activeDataset !== 'umap'" class="flex flex-col">
+          <div class="px-2">
+            <h3>Explanation</h3>
+          </div>
+          <div class="p-2 bg-white rounded flex-grow">
+            <p>
+              Spatial transcriptome schematics show transverse sections of the
+              human embryo including the neural tube, dorsal aorta and
+              urogenital ridges. Sub-dissected domains around the dorsal aorta,
+              where hematopoietic stem cells first emerge from the ventral
+              vessel wall, are highlighted.
+            </p>
+          </div>
+        </div>
+        <div v-else-if="activeDataset === 'umap'" class="flex flex-col">
+          <div class="px-2">
+            <h3>Explanation</h3>
+          </div>
+          <div class="p-2 bg-white rounded flex-grow">
+            <p>
+              The UMAP dataset shows hematopoietic stem/progenitor cells and
+              niche populations within the dorsal aorta and sub-aortic
+              mesenchyme of human embryos CS13-15.
+            </p>
+          </div>
+        </div>
+        <div v-if="activePlotType === 'heatmap'" class="flex flex-col">
+          <div class="px-2">
+            <h3>Explanation</h3>
+          </div>
+          <div class="p-2 bg-white rounded flex-grow">
+            <p>
+              Heatmap shows the summed-specificity weights between each
+              domain/cell type ligand-receptor pair. Pairs connected by many
+              specific edges will have higher summed-specificity weights i.e.
+              greater predicted signaling interactions.
+            </p>
+          </div>
+        </div>
+        <div
+          v-else-if="activePlotType === 'interactions'"
+          class="flex flex-col"
+        >
+          <div class="px-2">
+            <h3>Explanation</h3>
+          </div>
+          <div class="p-2 bg-white rounded flex-grow">
+            <p>
+              The Interactions tab show NATMI predicted ligand-receptor
+              interactions for the selected domains as a network. The top 15
+              specificity weights are highlighted by red arrows. Node size is
+              proportional to the number of interactions.
+            </p>
+          </div>
         </div>
       </div>
     </div>

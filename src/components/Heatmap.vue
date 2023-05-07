@@ -35,7 +35,7 @@ const chartOptions = ref({
   },
   chart: {
     type: "heatmap",
-    width: 600,
+    width: 610,
     height: props.height,
     animation: false,
   },
