@@ -22,7 +22,16 @@ import Explorer from "./components/Explorer.vue";
   </div>
   <div class="grid grid-rows-1 grid-cols-1 gap-4">
     <div class="p-2 bg-slate-50">
-      <p class="text-sm text-center">Developed by Omiqa Bioinformatics</p>
+      <p class="text-sm text-center">
+        Developed by
+        <a
+          class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+          href="https://www.omiqa.bio/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Omiqa Bioinformatics</a
+        >
+      </p>
     </div>
   </div>
 </template>

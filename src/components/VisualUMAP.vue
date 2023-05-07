@@ -25,14 +25,14 @@ const menusActive = computed(() => {
 });
 
 const symbol = "circle";
-const radius = 3;
+const radius = 2;
 
 const chartOptionsHe = ref({
   credits: {
     enabled: false,
   },
   title: {
-    text: "",
+    text: "Hematoendothelial",
   },
   chart: {
     reflow: false,
@@ -66,7 +66,7 @@ const chartOptionsNiche = ref({
     enabled: false,
   },
   title: {
-    text: "",
+    text: "Mesenchymal/Endothelial",
   },
   chart: {
     reflow: false,

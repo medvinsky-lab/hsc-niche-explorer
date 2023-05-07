@@ -16,8 +16,8 @@
           populations
         </li>
         <li>
-          The interaction plot shows the top 15 interactions between selected
-          populations
+          You can pan and zoom the interactions network with your mouse or
+          trackpad
         </li>
       </ol>
     </div>
