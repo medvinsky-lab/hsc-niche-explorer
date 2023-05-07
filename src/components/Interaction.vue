@@ -78,6 +78,25 @@ function initPlot() {
     ]);
   });
 
+  // Color top N interactions
+  const n = 15;
+  chart
+    .edges()
+    .sort((a, b) => {
+      return b - a;
+    })
+    .slice(0, n)
+    .style({
+      "line-color": "red",
+      "target-arrow-color": "red",
+    });
+
+  // Click to show label
+  chart.on("click", "edge", (event) => {
+    console.log("Triggered");
+    event.target.toggleClass("show");
+  });
+
   // Calculate node degrees and add as data
   const dcn = chart.elements().degreeCentralityNormalized();
   chart.nodes().forEach((n) => {

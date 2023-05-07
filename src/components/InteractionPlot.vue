@@ -1,6 +1,9 @@
 <script setup>
 import Interaction from "./Interaction.vue";
 import InteractionDataCS13 from "../data/interactions/cs13_interactions.json";
+import InteractionDataCS14 from "../data/interactions/cs14_interactions.json";
+import InteractionDataCS16 from "../data/interactions/cs16_interactions.json";
+import InteractionDataUMAP from "../data/interactions/umap_interactions.json";
 
 import { storeToRefs } from "pinia";
 import { useDatasetStore } from "../stores/datasets";
@@ -31,6 +34,21 @@ const activeData = computed(() => {
   if (selected.value) {
     if (activeDataset.value === "cs13") {
       return InteractionDataCS13[
+        activeLigand.value + "_vs_" + activeReceptor.value
+      ];
+    }
+    if (activeDataset.value === "cs14") {
+      return InteractionDataCS14[
+        activeLigand.value + "_vs_" + activeReceptor.value
+      ];
+    }
+    if (activeDataset.value === "cs16") {
+      return InteractionDataCS16[
+        activeLigand.value + "_vs_" + activeReceptor.value
+      ];
+    }
+    if (activeDataset.value === "umap") {
+      return InteractionDataUMAP[
         activeLigand.value + "_vs_" + activeReceptor.value
       ];
     }
