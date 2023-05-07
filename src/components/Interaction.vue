@@ -1,20 +1,23 @@
 <script setup>
 import cytoscape from "cytoscape";
 import d3Force from "cytoscape-d3-force";
-import { ref, onMounted } from "vue";
-import InteractionDataCS13 from "../data/interactions/cs13_interactions.json";
+import { ref, onMounted, watch } from "vue";
+
+const props = defineProps({
+  activeData: {
+    type: Array,
+    required: true,
+  },
+});
 
 cytoscape.use(d3Force);
 
-const activeLigand = "dorsal_inner";
-const activeReceptor = "dorsal_outer";
-const activeData = InteractionDataCS13[activeLigand + "_vs_" + activeReceptor];
-
 const cy = ref();
-
-onMounted(() => {
+function initPlot() {
   const chart = cytoscape({
     container: cy.value,
+    minZoom: 0.2,
+    maxZoom: 1.5,
     style: [
       {
         selector: ".show",
@@ -47,7 +50,7 @@ onMounted(() => {
     ],
   });
   // Add data
-  activeData.forEach((d) => {
+  props.activeData.forEach((d) => {
     chart.add([
       {
         group: "nodes",
@@ -96,7 +99,15 @@ onMounted(() => {
       manyBodyStrength: -300,
     })
     .run();
-});
+}
+onMounted(initPlot);
+
+watch(
+  () => props.activeData,
+  () => {
+    initPlot();
+  }
+);
 </script>
 <template>
   <div ref="cy" class="w-full h-full"></div>
