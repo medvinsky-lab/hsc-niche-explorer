@@ -121,7 +121,7 @@ function updatePlotType(newPlotType) {
       <div class="grid grid-rows-1 grid-cols-2 gap-4 py-2">
         <div v-if="activeDataset !== 'umap'" class="flex flex-col">
           <div class="px-2">
-            <h3>Explanation</h3>
+            <h3 class="text-sm font-semibold text-slate-600">Explanation</h3>
           </div>
           <div class="p-2 bg-white rounded flex-grow">
             <p>
@@ -135,7 +135,7 @@ function updatePlotType(newPlotType) {
         </div>
         <div v-else-if="activeDataset === 'umap'" class="flex flex-col">
           <div class="px-2">
-            <h3>Explanation</h3>
+            <h3 class="text-sm font-semibold text-slate-600">Explanation</h3>
           </div>
           <div class="p-2 bg-white rounded flex-grow">
             <p>
@@ -147,7 +147,7 @@ function updatePlotType(newPlotType) {
         </div>
         <div v-if="activePlotType === 'heatmap'" class="flex flex-col">
           <div class="px-2">
-            <h3>Explanation</h3>
+            <h3 class="text-sm font-semibold text-slate-600">Explanation</h3>
           </div>
           <div class="p-2 bg-white rounded flex-grow">
             <p>
@@ -163,7 +163,7 @@ function updatePlotType(newPlotType) {
           class="flex flex-col"
         >
           <div class="px-2">
-            <h3>Explanation</h3>
+            <h3 class="text-sm font-semibold text-slate-600">Explanation</h3>
           </div>
           <div class="p-2 bg-white rounded flex-grow">
             <p>
