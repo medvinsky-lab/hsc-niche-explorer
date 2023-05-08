@@ -39,9 +39,9 @@ function hover(option) {
     <div class="relative">
       <button
         @click="$emit('toggle')"
-        class="p-2 bg-white w-[250px] rounded text-sm text-slate-400 text-left border-gray-100 border-2"
+        class="p-2 bg-white w-[250px] rounded border-gray-100 border-2"
       >
-        {{ placeholder }}
+        <p class="text-sm text-slate-400 text-left">{{ placeholder }}</p>
       </button>
       <div
         v-show="open"
