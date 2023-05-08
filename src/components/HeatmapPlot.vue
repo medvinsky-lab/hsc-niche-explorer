@@ -36,9 +36,9 @@ const heatmapData = computed(() => {
 const highcharts = ref(null);
 watch(activeSelection, () => {
   const selected = activeSelection.value.every((e) => e != null);
+  const chart = highcharts.value.$refs.heatmap.chart;
+  const series = chart.series[0];
   if (selected) {
-    const chart = highcharts.value.$refs.heatmap.chart;
-    const series = chart.series[0];
     const ligandIndex = heatmapData.value.axis.findIndex((e) => {
       return e.id == activeLigand.value;
     });
@@ -47,6 +47,12 @@ watch(activeSelection, () => {
     });
     series.points.forEach((point, index) => {
       if ((point.x === receptorIndex) & (point.y === ligandIndex)) {
+        point.select();
+      }
+    });
+  } else if (!selected) {
+    series.points.forEach((point, index) => {
+      if (point.selected) {
         point.select();
       }
     });
